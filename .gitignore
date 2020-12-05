@@ -1,6 +1,10 @@
 __pycache__
 .serverless
+.slsignore
 env
 node_modules
 venv
 zappa*
+.
+..
+.gitignore
