@@ -1,0 +1,6 @@
+__pycache__
+.serverless
+env
+node_modules
+venv
+zappa*
