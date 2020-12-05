@@ -30,24 +30,6 @@ def allowed_file(filename):
         return True
     else:
         return False
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-def process_upload(uploaded_file):
-=======
-      
-
-def process_upload(uploaded_file, project):
->>>>>>> 4543a73... Added serverless deployment
-    lines = uploaded_file.readlines()
-    for line in lines:
-        report = json.loads(line)
-<<<<<<< HEAD
-        text = '*Secrets Found*\n\n'
-=======
-        text = '*Secrets Found*\n\n*Project:* ' + project + '\n'
->>>>>>> 4543a73... Added serverless deployment
-=======
       
 
 def process_upload(uploaded_file, project):
@@ -55,7 +37,6 @@ def process_upload(uploaded_file, project):
     for line in lines:
         report = json.loads(line)
         text = '*Secrets Found*\n\n*Project:* ' + project + '\n'
->>>>>>> 4543a73c62b39697268ad63985b3a45b1fedab09
         for k in report:
             if k not in ('stringsFound', 'diff', 'printDiff'):
                 text += f"*{k}:* {report[k]}\n"
@@ -80,26 +61,6 @@ def process_upload(uploaded_file, project):
                         }
                     ]
                 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-        url = "Webhook Url"
-=======
-        url = os.environ['WEBHOOK_URL']
->>>>>>> 4543a73c62b39697268ad63985b3a45b1fedab09
-        # Call webhook with payload
-        requests.post(url, json=payload)
-
-@app.route('/')
-def healthcheck():
-    return (
-        json.dumps('TruffleHog Notifier'),
-        200,
-        {'Content-Type': 'application/json'}
-    )
-
-<<<<<<< HEAD
-@app.route('/', methods=['POST'])
-=======
         url = os.environ['WEBHOOK_URL']
         # Call webhook with payload
         requests.post(url, json=payload)
@@ -113,25 +74,12 @@ def healthcheck():
     )
 
 @app.route('/upload', methods=['POST'])      
->>>>>>> 4543a73... Added serverless deployment
-=======
-@app.route('/upload', methods=['POST'])      
->>>>>>> 4543a73c62b39697268ad63985b3a45b1fedab09
 def upload_file():
     if request.method == "POST":
         
         # check if the post request has the file part
-<<<<<<< HEAD
-<<<<<<< HEAD
-        
-=======
         default_project = 'Not Specified'
         project = request.form.get('project', default_project)
->>>>>>> 4543a73... Added serverless deployment
-=======
-        default_project = 'Not Specified'
-        project = request.form.get('project', default_project)
->>>>>>> 4543a73c62b39697268ad63985b3a45b1fedab09
         filekey = 'file'
 
         if filekey not in request.files:          
@@ -146,26 +94,12 @@ def upload_file():
         if uploaded_file.filename != '':  
             if uploaded_file and allowed_file(uploaded_file.filename):
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            process_upload(uploaded_file)
-            return {
-            'statusCode': 200,
-            'body': json.dumps("File uploaded successfully")
-            }
-=======
-=======
->>>>>>> 4543a73c62b39697268ad63985b3a45b1fedab09
                 process_upload(uploaded_file, project)
                 return (
                     json.dumps('File Uploaded successfully'),
                     200,
                     {'Content-Type': 'application/json'}
                 )
-<<<<<<< HEAD
->>>>>>> 4543a73... Added serverless deployment
-=======
->>>>>>> 4543a73c62b39697268ad63985b3a45b1fedab09
 
             else :
                 return (
@@ -173,13 +107,12 @@ def upload_file():
                     403,
                     {'Content-Type': 'application/json'}
                 )
-        else:   
+        else :   
             return (
                 json.dumps('No file uploaded'),
                 400,
                 {'Content-Type': 'application/json'}
             )
-        
         
     else :
         return (
