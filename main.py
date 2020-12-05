@@ -25,13 +25,14 @@ def allowed_file(filename):
         return True
     else:
         return False
-        
-def process_upload(uploaded_file):
+
+
+def process_upload(uploaded_file, project):
     lines = uploaded_file.readlines()
     for line in lines:
         print (line)
         report = json.loads(line)
-        text = '*Secrets Found*\n\n'
+        text = '*Secrets Found*\n\n*Project:*' + ' ' + project + '\n'
         for k in report:
             if k not in ('stringsFound', 'diff', 'printDiff'):
                 text += f"*{k}:* {report[k]}\n"
@@ -56,17 +57,19 @@ def process_upload(uploaded_file):
                         }
                     ]
                 }
-        url = "Webhook Url"
+        url = "https://hooks.slack.com/services/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"
         # Call webhook with payload
         requests.post(url, json=payload)
 
+@app.route('/', methods=['POST'])      
 
-@app.route('/', methods=['POST'])
 def upload_file():
     if request.method == "POST":
         
         # check if the post request has the file part
-        
+        default_project = 'Not Specified'
+        project = request.form.get('project', default_project)
+
         filekey = 'file'
         if filekey not in request.files:
             
@@ -82,7 +85,7 @@ def upload_file():
 
         if uploaded_file and allowed_file(uploaded_file.filename):
 
-            process_upload(uploaded_file)
+            process_upload(uploaded_file, project)
             return {
             'statusCode': 200,
             'body': json.dumps("File uploaded successfully")
