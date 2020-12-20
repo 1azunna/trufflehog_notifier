@@ -8,7 +8,7 @@ node_modules/
 dist/
 
 # Serverless files
-.serveless/
+.serverless/
 
 # Compiled Java class files
 *.class
