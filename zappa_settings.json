@@ -1,0 +1,13 @@
+{
+    "production": {
+        "app_function": "main",
+        "profile_name": "Your AWS Profile",
+        "project_name": "trufflehog-notifier",
+        "runtime": "python3.8",
+        "s3_bucket": "zappa-1iaypw52k",
+        "aws_region": "Your AWS Region",
+        "aws_environment_variables": {
+            "WEBHOOK_URL": "Your Slack Webhook URL"
+        }
+    }
+}

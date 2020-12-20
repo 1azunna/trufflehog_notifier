@@ -17,16 +17,16 @@ custom:
 
 provider:
   name: aws
-  runtime: python3.6
+  runtime: python3.8
   stage: dev
   region: us-west-2
 
 functions:
   app:
-    handler: wsgi.handler
+    handler: wsgi_handler.handler
     description: A simple app to send trufflehog notifications to slack
     environment: 
       WEBHOOK_URL: Your slack webhook url
     events:
-      - http: ANY /
-      - http: 'ANY {proxy+}'
+      - http: GET /
+      - http: POST /upload

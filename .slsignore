@@ -1,0 +1,15 @@
+# it works like a .gitignore
+# for sls
+README.md
+*.log
+
+# ignore node_modules
+node_modules/*
+
+# ignore python venv
+venv/* 
+
+.env.example
+.gitignore
+.git/*
+__tests__/*
