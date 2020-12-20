@@ -1,4 +1,0 @@
-Flask==1.1.2
-flask_lambda==0.0.4
-flask_lambda_support==0.1.5
-requests==2.25.0
